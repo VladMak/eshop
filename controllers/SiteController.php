@@ -1,6 +1,6 @@
 <?php
 
-/* 
+/*
  * Copyright (C) 2019 vladislav
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,7 +17,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-return array(
-    'product/([0-9]+)' => 'product/view/$1',
-    '' => 'site/index',
-);
+/**
+ * Description of SiteController
+ *
+ * @author vladislav
+ */
+class SiteController {
+    public function actionIndex(){
+        require_once ROOT . '/views/site/index.php';
+        return true;
+    }
+}
