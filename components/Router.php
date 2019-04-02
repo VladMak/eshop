@@ -50,15 +50,20 @@ class Router {
     public function run() {
         //Получить строку запроса
         $uri = $this->getURI();
+        /*$test = preg_match("~(([0-9]+|[a-z]+)[.](.*))~", $uri);//определяем, файл это или нет
+        if($test){
+            echo $uri;
+            return $uri;
+        }*/
 
         //Проверить наличие такого запроса в routes
         foreach ($this->routes as $uriPattern => $path) {
+
             //Сравниваем $uriPattern и $uri
             if (preg_match("~$uriPattern~", $uri)) {
 
                 //Получаем внутренний путь из внешнего согласно правилу
                 $internalRoute = preg_replace("~$uriPattern~", $path, $uri);
-
 
                 //Определить какой контроллер и action
                 //обрабатывает запрос
@@ -80,7 +85,7 @@ class Router {
                 }
                 //Создать объект, вызвать метод этого контроллера
                 $controllerObject = new $controllerName;
-                
+
                 $result = call_user_func_array(array($controllerObject, $actionName), $parametrs);
                 //$result = $controllerObject->$actionName($parametrs);
 
